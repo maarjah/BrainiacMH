@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Brainiac</string>
+    <string name="daily_goals">Set your daily goals for extra practice</string>
+    <string name="track_goals">Did you reach your daily goals?</string>
+    <string name="weekly_progress">Weekly progress</string>
+    <string name="set_goals">Set goals</string>
+    <string name="subject_one">Math</string>
+    <string name="subject_two">Reading</string>
+    <string name="unit">min</string>
+    <string name="confirm">confirm</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
+</resources>
