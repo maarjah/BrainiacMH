@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.brainiac.ui.theme.gradientColors
 
+
 @Composable
 fun Progress(navController: NavController) {
     val context = LocalContext.current
@@ -52,7 +53,8 @@ fun Progress(navController: NavController) {
     if(countConfirm == -111) {
         countConfirm = savedCountConfirm.value
     }
-    var displaySize = (countYes*0.07).toFloat()
+
+    var displaySize = DisplaySize().calculateDisplaySize(countYes)
 
     Surface(
         modifier = Modifier.fillMaxSize(),

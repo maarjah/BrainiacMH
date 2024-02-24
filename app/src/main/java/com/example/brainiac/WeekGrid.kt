@@ -1,5 +1,6 @@
 package com.example.brainiac
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,7 +22,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -205,7 +205,7 @@ fun WeekGrid(navController: NavController) {
 
                         }
 
-                        //Toast.makeText(context, "Weekly goals saved", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Weekly goals saved", Toast.LENGTH_SHORT).show()
                         navController.navigate(CheckGoals.route)
                     },
                 ) {
