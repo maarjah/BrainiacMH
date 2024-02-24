@@ -8,9 +8,17 @@ class DisplaySizeTest {
 
     @Test
     fun validateCalculateDisplaySize() {
-        val result = classUnderTest.calculateDisplaySize(
-            countYes = 3
+        val result1 = classUnderTest.calculateDisplaySize(
+            countYes = 7
         )
-        assertEquals(0.21f, result, 0.001f)
+        val result2 = classUnderTest.calculateDisplaySize(
+            countYes = 0
+        )
+        val result3 = classUnderTest.calculateDisplaySize(
+            countYes = 14
+        )
+        assertEquals(0.49f, result1, 0.001f)
+        assertEquals(0.0f, result2, 0.001f)
+        assertEquals(0.98f, result3, 0.001f)
     }
 }
