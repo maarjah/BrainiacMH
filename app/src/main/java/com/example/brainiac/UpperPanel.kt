@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.sp
 import com.example.brainiac.ui.theme.LightPurple
 import com.example.brainiac.ui.theme.gradientColors
 
+//header element for Activites 2, 3, 4 consisting of logo and app name
 @Composable
 fun UpperPanel() {
     Column {

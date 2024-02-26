@@ -42,17 +42,22 @@ import com.example.brainiac.ui.theme.LightYellow
 import com.example.brainiac.ui.theme.gradientColors
 import kotlinx.coroutines.launch
 
+
+/*
+Corresponds to Activity 2.
+ */
 @Composable
-fun WeekGrid(navController: NavController) {
+fun SetGoals(navController: NavController) {
+    //variable for context
     val context = LocalContext.current
-
+    //variable for scope for storing data in DataStore
     val scope = rememberCoroutineScope()
-
+    //getting an instance of DataStore
     val dataStore = DataStoreManager(context)
-
+    //initializing variables for countOne and countTwo data in DataStore for storing Reading and Math daily goal data
     val savedCountOne = dataStore.getCountOneData.collectAsState(initial = -111)
     val savedCountTwo = dataStore.getCountTwoData.collectAsState(initial = -111)
-
+    //initializing variables count_one and count_two with values stored in DataStore to take user input from UI and remembering state in case recompose happens.
     var count_one by rememberSaveable {
         mutableIntStateOf(savedCountOne.value)
     }
@@ -71,10 +76,10 @@ fun WeekGrid(navController: NavController) {
     }
 
 
-
+    //initializing min and max values for countOne and countTwo data for user input from GUI counter elements for Reading and Math goals
     val min = 0
     val max = 60
-
+    //crating UI
     Surface (
         modifier = Modifier.fillMaxSize(),
         color = Color(0xFF000000)) {
@@ -114,6 +119,7 @@ fun WeekGrid(navController: NavController) {
                         .fillMaxWidth(0.3f))
                 TextButton(
                     onClick = {
+                        //counting from 0, step 5
                         if(count_one > min) {
                             count_one -= 5
                         }},
@@ -133,6 +139,7 @@ fun WeekGrid(navController: NavController) {
                     modifier = Modifier.width(30.dp),
                     textAlign = TextAlign.Center)
                 TextButton(onClick = {
+                    //counting up to 60, step 5
                     if(count_one < max){
                         count_one += 5
                     }}) {
@@ -159,6 +166,7 @@ fun WeekGrid(navController: NavController) {
                         .fillMaxWidth(0.3f))
                 TextButton(
                     onClick = {
+                        //counting from 0, step 5
                         if(count_two > min){
                             count_two -= 5
                         }},
@@ -176,6 +184,7 @@ fun WeekGrid(navController: NavController) {
                     modifier = Modifier.width(30.dp),
                     textAlign = TextAlign.Center)
                 TextButton(onClick = {
+                    //counting up to 60, step 5
                     if(count_two < max){
                         count_two += 5
                     }}) {
@@ -199,13 +208,15 @@ fun WeekGrid(navController: NavController) {
                     colors = ButtonDefaults.buttonColors(LightPurple),
                     modifier = Modifier.padding(bottom = 40.dp),
                     onClick = {
+                        //storing the user input from UI for Reading and Math goals in DataStore
                         scope.launch {
                             dataStore.setCountOneData(count_one)
                             dataStore.setCountTwoData(count_two)
 
                         }
-
+                        //confirming goals are saved
                         Toast.makeText(context, "Weekly goals saved", Toast.LENGTH_SHORT).show()
+                        //navigating to Activity3 to track daily goals
                         navController.navigate(CheckGoals.route)
                     },
                 ) {

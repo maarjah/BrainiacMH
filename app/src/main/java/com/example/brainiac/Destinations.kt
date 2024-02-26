@@ -10,14 +10,15 @@ import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.ui.graphics.vector.ImageVector
 
+//Interface for navigation destinations
 interface Destinations {
     val route: String
     val title: String
     val icon: ImageVector
 }
 
-object WeekGrid: Destinations {
-    override val route = "WeekGrid"
+object SetGoals: Destinations {
+    override val route = "SetGoals"
     override val title = "Goals"
     override val icon = Icons.Filled.Add
 }

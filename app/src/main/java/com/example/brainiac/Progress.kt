@@ -32,14 +32,17 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.brainiac.ui.theme.gradientColors
 
-
+//Corresponds to Activity 4
 @Composable
 fun Progress(navController: NavController) {
+    //initializing context
     val context = LocalContext.current
+    //instantiating DataStore
     val dataStore = DataStoreManager(context)
+    //getting values from DataStore for counting clicks of "Yes" and "Confirm" from UI
     val savedCountYes = dataStore.getCountYesData.collectAsState(initial = -111)
     val savedCountConfirm = dataStore.getCountConfirmData.collectAsState(initial = -111)
-
+    //variables for counting "Yes" and "Confirm" clicks in UI, remembering state in case of recompose
     var countYes by rememberSaveable {
         mutableIntStateOf(savedCountYes.value)
     }
@@ -54,8 +57,10 @@ fun Progress(navController: NavController) {
         countConfirm = savedCountConfirm.value
     }
 
+    //calculating display size of the brain image in accordance to the progress
     var displaySize = DisplaySize().calculateDisplaySize(countYes)
 
+    //creating UI
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = Color(0xFF000000),

@@ -12,19 +12,22 @@ import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
 import com.example.brainiac.ui.theme.LightYellow
 
+//creating Bottom Navigation Bar
 
 @Composable
 fun MyBottomNavigation(navController: NavController) {
     val destinationList = listOf<Destinations>(
-        WeekGrid,
+        SetGoals,
         CheckGoals,
         Progress
     )
+    //remembering state in case of recompose
     val selectedIndex = rememberSaveable {
         mutableStateOf(0)
     }
     NavigationBar(containerColor = LightYellow
     ) {
+        //creating each navigation element for corresponding Composables
         destinationList.forEachIndexed { index, destination ->
             NavigationBarItem(
                 label = {
@@ -41,7 +44,7 @@ fun MyBottomNavigation(navController: NavController) {
                 onClick = {
                     selectedIndex.value = index
                     navController.navigate(destinationList[index].route) {
-                        popUpTo(WeekGrid.route)
+                        popUpTo(SetGoals.route)
                         launchSingleTop = true
                     }
                 }

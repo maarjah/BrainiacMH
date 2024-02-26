@@ -23,13 +23,17 @@ import androidx.navigation.NavController
 import com.example.brainiac.ui.theme.gradientColors
 import kotlinx.coroutines.delay
 
-
+/*
+Corresponds to Activity 1. For displaying a splash screen when starting the app.
+After that navigating to the Composable "SetGoals"
+ */
 @Composable
 fun SplashScreen(navController: NavController) {
     LaunchedEffect(key1=true) {
        delay(3000)
+        //clearing backstack
         navController.popBackStack()
-        navController.navigate("WeekGrid")
+        navController.navigate("SetGoals")
     }
 
         Surface(
@@ -60,9 +64,4 @@ fun SplashScreen(navController: NavController) {
                 )
             }
         }
-
-    /*
-        LaunchedEffect(Unit) {
-            delay(2000)
-        }*/
 }

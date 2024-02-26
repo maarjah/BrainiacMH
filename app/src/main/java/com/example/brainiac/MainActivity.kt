@@ -33,11 +33,12 @@ class MainActivity : ComponentActivity() {
                     color = Color(0xFF000000)
                 ) {
                     val navController = rememberNavController()
+                    //showing the splash screen and then navigating to MyApp Composable
                     NavHost(navController = navController, startDestination = "Splash") {
                         composable("Splash") {
                             SplashScreen(navController = navController)}
 
-                        composable("WeekGrid") {
+                        composable("SetGoals") {
                             MyApp(navController = navController)
                         }
                     }
@@ -47,14 +48,16 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+
+//setting bottom navigation bar, indicating start destination as SetGoals Activity
 @Composable
 fun MyApp(navController: NavController) {
     val navController = rememberNavController()
     Scaffold(bottomBar = { MyBottomNavigation(navController = navController) }) {
         Box(Modifier.padding(it)) {
-            NavHost(navController = navController, startDestination = WeekGrid.route) {
-                composable(WeekGrid.route) {
-                    WeekGrid(navController = navController)
+            NavHost(navController = navController, startDestination = SetGoals.route) {
+                composable(SetGoals.route) {
+                    SetGoals(navController = navController)
                 }
                 composable(CheckGoals.route) {
                     CheckGoals(navController = navController)

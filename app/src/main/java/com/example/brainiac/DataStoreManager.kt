@@ -9,8 +9,9 @@ import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-
+//creating DataStore class for storing user input and interaction data
 class DataStoreManager(private val context: Context) {
+    //creating variables and initializing Keys for DataStore map
     companion object {
         val Context.dataStore: DataStore<Preferences> by preferencesDataStore("Goals")
         val countOneData = intPreferencesKey("COUNT_ONE")
@@ -19,7 +20,7 @@ class DataStoreManager(private val context: Context) {
         val countConfirmData = intPreferencesKey("COUNT_COUNT")
     }
 
-
+    //creating respective setters
     suspend fun setCountOneData(liveData: Int) {
         context.dataStore.edit { pref ->
             pref[countOneData] = liveData
@@ -41,7 +42,7 @@ class DataStoreManager(private val context: Context) {
         }
     }
 
-
+    //creating respective getters
     val getCountOneData: Flow<Int> = context.dataStore.data
         .map { prefOne ->
             prefOne[countOneData] ?: 0
@@ -65,15 +66,5 @@ class DataStoreManager(private val context: Context) {
             prefConfirm[countConfirmData] ?: 0
         }
 
-
-    val countOneDataFlow: Flow<Int> = context.dataStore.data.map { prefOne ->
-        val storedOne = prefOne[countOneData] ?: 0
-        storedOne
-    }
-
-    val countTwoDataFlow: Flow<Int> = context.dataStore.data.map { prefOne ->
-        val storedOne = prefOne[countTwoData] ?: 0
-        storedOne
-    }
 }
 

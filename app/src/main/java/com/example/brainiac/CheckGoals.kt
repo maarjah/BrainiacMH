@@ -44,16 +44,21 @@ import com.example.brainiac.ui.theme.LightYellow
 import com.example.brainiac.ui.theme.gradientColors
 import kotlinx.coroutines.launch
 
+//Corresponds to Activity 3
 @Composable
 fun CheckGoals(navController: NavController) {
+    //variable for context
     val context = LocalContext.current
+    //scope for storing sata in DataStore
     val scope = rememberCoroutineScope()
+    //instantiating DataStore
     val dataStore = DataStoreManager(context)
+    //getting data from DataStore for displaying current user data
     val savedCountOne = dataStore.getCountOneData.collectAsState(initial = -111)
     val savedCountTwo = dataStore.getCountTwoData.collectAsState(initial = -111)
     val savedCountYes = dataStore.getCountYesData.collectAsState(initial = -111)
     val savedCountConfirm = dataStore.getCountConfirmData.collectAsState(initial = -111)
-
+    //initializing variables for counting "Yes" and "Confirm" clicks form UI, remembering state in case of recompose
     var countYes by rememberSaveable {
         mutableIntStateOf(savedCountYes.value)
     }
@@ -75,6 +80,10 @@ fun CheckGoals(navController: NavController) {
         mutableStateOf(false)
     }
 
+    /*Clicking "Confirm" button counts how many times the button has been clicked.
+    Counts to 7 to keep track of a week.
+    Counts how many times "Yes" has been clicked on UI
+     */
     fun clickConfirm() {
         if(countConfirm == 7) {
             countConfirm = 1
@@ -96,6 +105,7 @@ fun CheckGoals(navController: NavController) {
 
         }
 
+        //displaying different Toast messages depending on the daily progress
         if(radioStateOne && radioStateTwo){
             Toast.makeText(context, "GOOD JOB!", Toast.LENGTH_SHORT).show()
         }
@@ -105,15 +115,15 @@ fun CheckGoals(navController: NavController) {
             Toast.makeText(context, "FIRST WORK HARD, THEN PLAY HARD!", Toast.LENGTH_SHORT).show()
         }
 
-
+        //navigating to Progress
         navController.navigate(Progress.route)
-
+        //storing data of counts "Yes" and "Confirm" in DataStore
         scope.launch {
             dataStore.saveConfirmData(countYes, countConfirm)
         }
     }
 
-
+    //creating UI
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = Color(0xFF000000),

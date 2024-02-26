@@ -3,6 +3,7 @@ package com.example.brainiac
 import org.junit.Assert.*
 import org.junit.Test
 
+//testing correct functioning of DisplaySize() calculation
 class DisplaySizeTest {
     private val classUnderTest = DisplaySize()
 
